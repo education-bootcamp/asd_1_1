@@ -1,5 +1,9 @@
 package entity;
 
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,6 +24,9 @@ public class Student {
             joinColumns = @JoinColumn(name = "student_id",
                     referencedColumnName = "id")
     )
+    @GenericGenerator(name="address_sequence", strategy = "sequence")
+    @CollectionId(columns = @Column(name = "address_id"),
+            generator = "address_sequence", type = @Type(type = "int"))
     private Collection<Address> addressList = new ArrayList<>();/*HashSet<>(); => we can't use indexing*/
 
     public Student(long studentId, String name, Collection<Address> addressList) {
