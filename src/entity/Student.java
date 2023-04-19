@@ -18,24 +18,15 @@ public class Student {
     @Column(name = "student_name", length = 50, nullable = false)
     private String name;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "address_table",
-            joinColumns = @JoinColumn(name = "student_id",
-                    referencedColumnName = "id")
-    )
-    @GenericGenerator(name="address_sequence", strategy = "sequence")
-    @CollectionId(columns = @Column(name = "address_id"),
-            generator = "address_sequence", type = @Type(type = "int"))
-    private Collection<Address> addressList = new ArrayList<>();/*HashSet<>(); => we can't use indexing*/
-
-    public Student(long studentId, String name, Collection<Address> addressList) {
-        this.studentId = studentId;
-        this.name = name;
-        this.addressList = addressList;
-    }
+    private Laptop laptop;
 
     public Student() {
+    }
+
+    public Student(long studentId, String name, Laptop laptop) {
+        this.studentId = studentId;
+        this.name = name;
+        this.laptop = laptop;
     }
 
     public long getStudentId() {
@@ -54,20 +45,11 @@ public class Student {
         this.name = name;
     }
 
-    public Collection<Address> getAddressList() {
-        return addressList;
+    public Laptop getLaptop() {
+        return laptop;
     }
 
-    public void setAddressList(Collection<Address> addressList) {
-        this.addressList = addressList;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "studentId=" + studentId +
-                ", name='" + name + '\'' +
-                ", addressList=" + addressList +
-                '}';
+    public void setLaptop(Laptop laptop) {
+        this.laptop = laptop;
     }
 }
