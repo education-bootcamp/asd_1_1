@@ -22,7 +22,12 @@ public class AppInitializer {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Student selectedStudent = session.find(Student.class,id);
             System.out.println(selectedStudent);
+            System.out.println("===========");
+            selectedStudent.getAddressList().stream()
+                    .forEach(e-> System.out.println(e.toString()));
+            System.out.println("===========");
         }
+
     }
 
     private static void saveStudent(Student sanath) {
