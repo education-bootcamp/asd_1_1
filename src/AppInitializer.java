@@ -5,8 +5,10 @@ import org.hibernate.Transaction;
 
 public class AppInitializer {
     public static void main(String[] args) {
-        Address address1 = new Address( "SriLanka","Colombo",15000);
-        Student student1 = new Student(1,"Sanath",address1);
+        Address residentialAddress = new Address( "SriLanka","Colombo",15000);
+        Address permanentAddress = new Address( "SriLanka","Kahatagasdigiliya",12500);
+        Student student1 = new Student(1,
+                "Sanath",residentialAddress,permanentAddress);
         saveStudent(student1);
     }
 

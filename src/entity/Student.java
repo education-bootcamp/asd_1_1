@@ -12,15 +12,30 @@ public class Student {
     private String name;
 
     @Embedded
-    private Address address;
+   /* @AttributeOverride(column = @Column(name = "residential_country"), name = "country")
+    @AttributeOverride(column = @Column(name = "residential_city"), name = "city")
+    @AttributeOverride(column = @Column(name = "residential_postal"), name = "postal")*/
+    /*@AttributeOverrides(value = {
+            @AttributeOverride(column = @Column(name = "residential_country"), name = "country"),
+            @AttributeOverride(column = @Column(name = "residential_city"), name = "city"),
+            @AttributeOverride(column = @Column(name = "residential_postal"), name = "postal")
+    })*/
+    private Address residentialAddress;
+
+    @Embedded
+  /*  @AttributeOverride(column = @Column(name = "permanent_country"), name = "country")
+    @AttributeOverride(column = @Column(name = "permanent_city"), name = "city")
+    @AttributeOverride(column = @Column(name = "permanent_postal"), name = "postal")*/
+    private Address permanentAddress;
 
     public Student() {
     }
 
-    public Student(long studentId, String name, Address address) {
+    public Student(long studentId, String name, Address residentialAddress, Address permanentAddress) {
         this.studentId = studentId;
         this.name = name;
-        this.address = address;
+        this.residentialAddress = residentialAddress;
+        this.permanentAddress = permanentAddress;
     }
 
     public long getStudentId() {
@@ -39,11 +54,19 @@ public class Student {
         this.name = name;
     }
 
-    public Address getAddress() {
-        return address;
+    public Address getResidentialAddress() {
+        return residentialAddress;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setResidentialAddress(Address residentialAddress) {
+        this.residentialAddress = residentialAddress;
+    }
+
+    public Address getPermanentAddress() {
+        return permanentAddress;
+    }
+
+    public void setPermanentAddress(Address permanentAddress) {
+        this.permanentAddress = permanentAddress;
     }
 }
