@@ -1,4 +1,5 @@
 
+import entity.Laptop;
 import entity.Student;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -19,7 +20,8 @@ public class HibernateUtil {
                         .configure()
                         .build();
                 MetadataSources metadataSources = new MetadataSources(standardServiceRegistry)
-                        .addAnnotatedClass(Student.class);
+                        .addAnnotatedClass(Student.class)
+                        .addAnnotatedClass(Laptop.class);
                 Metadata metadata = metadataSources.getMetadataBuilder().build();
                 sessionFactory = metadata.getSessionFactoryBuilder().build();
             }

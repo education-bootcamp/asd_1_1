@@ -1,6 +1,12 @@
 package entity;
 
+import javax.persistence.*;
+
+@Entity
 public class Laptop {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "code")
     private long id;
     private String brand;
 
