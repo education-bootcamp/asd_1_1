@@ -9,7 +9,7 @@ public class AppInitializer {
     public static void main(String[] args) {
         Laptop laptop = new Laptop(1,"Lenovo");
         Student student1 = new Student(1,"Kamal",laptop);
-        saveStudent(laptop, student1);
+        saveStudent(student1);
         //findStudent(1);
     }
 
@@ -21,14 +21,12 @@ public class AppInitializer {
 
     }
 
-    private static void saveStudent(Laptop laptop, Student student) {
+    private static void saveStudent(Student student) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            long savedLaptopId =(long) session.save(laptop);
             long savedId = (long) session.save(student);
             transaction.commit();
             System.out.println("saved Student Primary Key : " + savedId);
-            System.out.println("saved Laptop Primary Key : " + savedLaptopId);
         }
     }
 

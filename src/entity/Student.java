@@ -18,7 +18,7 @@ public class Student {
     @Column(name = "student_name", length = 50, nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Laptop laptop;
 
     public Student() {
