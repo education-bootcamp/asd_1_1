@@ -1,6 +1,9 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity(name = "student_table")
 public class Student {
@@ -11,31 +14,16 @@ public class Student {
     @Column(name = "student_name", length = 50, nullable = false)
     private String name;
 
-    @Embedded
-   /* @AttributeOverride(column = @Column(name = "residential_country"), name = "country")
-    @AttributeOverride(column = @Column(name = "residential_city"), name = "city")
-    @AttributeOverride(column = @Column(name = "residential_postal"), name = "postal")*/
-    /*@AttributeOverrides(value = {
-            @AttributeOverride(column = @Column(name = "residential_country"), name = "country"),
-            @AttributeOverride(column = @Column(name = "residential_city"), name = "city"),
-            @AttributeOverride(column = @Column(name = "residential_postal"), name = "postal")
-    })*/
-    private Address residentialAddress;
+    @ElementCollection
+    private Collection<Address> addressList= new ArrayList<>();/*HashSet<>(); => we can't use indexing*/
 
-    @Embedded
-  /*  @AttributeOverride(column = @Column(name = "permanent_country"), name = "country")
-    @AttributeOverride(column = @Column(name = "permanent_city"), name = "city")
-    @AttributeOverride(column = @Column(name = "permanent_postal"), name = "postal")*/
-    private Address permanentAddress;
-
-    public Student() {
-    }
-
-    public Student(long studentId, String name, Address residentialAddress, Address permanentAddress) {
+    public Student(long studentId, String name, Collection<Address> addressList) {
         this.studentId = studentId;
         this.name = name;
-        this.residentialAddress = residentialAddress;
-        this.permanentAddress = permanentAddress;
+        this.addressList = addressList;
+    }
+
+    public Student() {
     }
 
     public long getStudentId() {
@@ -54,19 +42,11 @@ public class Student {
         this.name = name;
     }
 
-    public Address getResidentialAddress() {
-        return residentialAddress;
+    public Collection<Address> getAddressList() {
+        return addressList;
     }
 
-    public void setResidentialAddress(Address residentialAddress) {
-        this.residentialAddress = residentialAddress;
-    }
-
-    public Address getPermanentAddress() {
-        return permanentAddress;
-    }
-
-    public void setPermanentAddress(Address permanentAddress) {
-        this.permanentAddress = permanentAddress;
+    public void setAddressList(Collection<Address> addressList) {
+        this.addressList = addressList;
     }
 }
