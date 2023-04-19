@@ -10,6 +10,9 @@ public class Laptop {
     private long id;
     private String brand;
 
+    @OneToOne(mappedBy = "laptop")
+    private Student student;
+
     public Laptop() {
     }
 
@@ -32,5 +35,13 @@ public class Laptop {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

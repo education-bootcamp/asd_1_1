@@ -18,8 +18,7 @@ public class Student {
     @Column(name = "student_name", length = 50, nullable = false)
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "laptop_id")
+    @OneToOne
     private Laptop laptop;
 
     public Student() {
