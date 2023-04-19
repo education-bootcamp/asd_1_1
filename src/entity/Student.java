@@ -15,7 +15,12 @@ public class Student {
     private String name;
 
     @ElementCollection
-    private Collection<Address> addressList= new ArrayList<>();/*HashSet<>(); => we can't use indexing*/
+    @JoinTable(
+            name = "address_table",
+            joinColumns = @JoinColumn(name = "student_id",
+                    referencedColumnName = "id")
+    )
+    private Collection<Address> addressList = new ArrayList<>();/*HashSet<>(); => we can't use indexing*/
 
     public Student(long studentId, String name, Collection<Address> addressList) {
         this.studentId = studentId;
